@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Movie Iist</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>영화명(국문)</th>
+        <th>영화명(영문)</th>
+        <th>개봉일</th>
+        <th>영화 유형</th>
+        <th>대표제작국가</th>
+        <th>대표 장르</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for movie in movieList %}
+        <tr>
+            <th>{{movie.movieNm}}</th>
+            <th>{{movie.movieNmEn}}</th>
+            <th>{{movie.openDt}}</th>
+            <th>{{movie.typeNm}}</th>
+            <th>{{movie.repNationNm}}</th>
+            <th>{{movie.repGenreNm}}</th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr/>
+<div>
+    <span>
+        {% if not movieList.has_previous %}
+            <a>맨처음</a>
+            <a>이전</a>
+        {% endif %}
+
+        {% if movieList.has_previous %}
+            <a href="?page=1">맨처음</a>
+            <a href="?page={{movieList.previous_page_number}}">이전</a>
+        {% endif %}
+
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            Page {{movieList.number}} of {{movieList.paginator.num_pages}}
+        </span>
+        &nbsp;&nbsp;&nbsp;
+
+        {% if movieList.has_next %}
+            <a href="?page={{movieList.next_page_number}}">다음</a>
+            <a href="?page={{movieList.paginator.num_pages}}">맨끝</a>
+        {% endif %}
+
+        {% if not movieList.has_next %}
+            <a>다음</a>
+            <a>맨끝</a>
+        {% endif %}
+    </span>
+</div>
+</body>
+</html>
